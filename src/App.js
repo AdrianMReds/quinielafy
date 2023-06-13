@@ -11,12 +11,12 @@ function App() {
     <React.Fragment>
       <Router>
         <Navbar />
-        <div className="pages">
+        <div className="pages" style={{ height: "90vh" }}>
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/resultados" element={<Resultados />} />
             <Route path="/tabla" element={<Tabla />} />
-            <Route path="/about" element={<Reglas />} />
+            <Route path="/reglas" element={<Reglas />} />
           </Routes>
         </div>
       </Router>

@@ -1,64 +1,47 @@
-import React, { useState } from "react";
-// import { FaBars, FaTimes, FaPaintBrush } from "react-icons/fa";
+import React, { useRef } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { BiFootball } from "react-icons/bi";
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
-  const [click, setClick] = useState(false);
+const Navbar = () => {
+  const navRef = useRef();
 
-  const handleClick = () => setClick(!click);
+  const showNavbar = () => {
+    navRef.current.classList.toggle("responsive_nav");
+  };
 
   return (
     <React.Fragment>
-      <nav className="navbar">
-        <div className="nav-container">
-          <NavLink exact to="/" className="nav-logo">
-            Quinielafy
+      <header>
+        <NavLink exact to="/" className="logo">
+          <h2>Quinielafy</h2>
+          <BiFootball style={{ fontSize: "30px", margin: "0 5px" }} />
+        </NavLink>
+
+        <nav ref={navRef}>
+          <NavLink exact to="/" onClick={showNavbar}>
+            Inicio
           </NavLink>
-          <ul className={click ? "nav-menu active" : "nav-menu"}>
-            <li className="nav-item">
-              <NavLink exact to="/" className="nav-links" onClick={handleClick}>
-                Inicio
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/resultados"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Resultados
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/tabla"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Tabla
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/about"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Reglas
-              </NavLink>
-            </li>
-          </ul>
-          <div className="nav-icon" onClick={handleClick}>
-            {/* {click ? <FaTimes /> : <FaBars />} */}
-          </div>
-        </div>
-      </nav>
+          <NavLink exact to="/resultados" onClick={showNavbar}>
+            Resultados
+          </NavLink>
+          <NavLink exact to="/tabla" onClick={showNavbar}>
+            Tabla
+          </NavLink>
+          <NavLink exact to="/reglas" onClick={showNavbar}>
+            Reglas
+          </NavLink>
+          <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+            <FaTimes />
+          </button>
+        </nav>
+        <button className="nav-btn" onClick={showNavbar}>
+          <FaBars />
+        </button>
+      </header>
     </React.Fragment>
   );
-}
+};
 
 export default Navbar;
